@@ -3,7 +3,12 @@ import db from '../utils/db';
 import { /*auth,*/ clerkClient, currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { profileSchema, validateWithZodSchema } from '@/utils/schemas';
+import {
+  imageSchema,
+  profileSchema,
+  validateWithZodSchema,
+} from '@/utils/schemas';
+import { uploadImage } from '@/utils/supabase';
 
 const renderError = (error: unknown): { message: string } => {
   console.log(error);
@@ -19,7 +24,7 @@ const getAuthUser = async () => {
     throw new Error('You must be logged in to access this route');
   }
 
-  if (!user.privateMetadata.hasProfile) redirect('/profile/create');
+  //   if (!user.privateMetadata.hasProfile) redirect('/profile/create');
   return user;
 };
 
@@ -79,6 +84,7 @@ export const updateProfileAction = async (
 
 export const fetchProfileImage = async () => {
   const user = await currentUser();
+
   if (!user) return null;
 
   const profile = await db.profile.findUnique({
@@ -87,15 +93,40 @@ export const fetchProfileImage = async () => {
       profileImage: true,
     },
   });
-  return profile?.profileImage;
+
+  const userPhoto = user.imageUrl;
+  return profile?.profileImage ?? userPhoto;
 };
 
 export const fetchProfile = async () => {
   const user = await getAuthUser();
 
-  const profile = db.profile.findUnique({
+  const profile = await db.profile.findUnique({
     where: { clerkId: user.id },
   });
   if (!profile) return redirect('/profile/create');
   return profile;
+};
+
+export const updateProfileImageAction = async (
+  prevState: unknown,
+  formData: FormData
+): Promise<{ message: string }> => {
+  const user = await getAuthUser();
+  try {
+    const image = formData.get('image') as File;
+    const validatedFields = validateWithZodSchema(imageSchema, { image });
+    const fullPath = await uploadImage(validatedFields.image);
+
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: { profileImage: fullPath },
+    });
+    revalidatePath('/profile');
+    return { message: 'Profile image updated successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
 };

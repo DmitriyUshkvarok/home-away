@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 const UserIcon = async () => {
   const profileImage = await fetchProfileImage();
+
   if (profileImage)
     return (
       <Image
