@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import {
   imageSchema,
   profileSchema,
+  propertySchema,
   validateWithZodSchema,
 } from '@/utils/schemas';
 import { uploadImage } from '@/utils/supabase';
@@ -129,4 +130,35 @@ export const updateProfileImageAction = async (
   } catch (error) {
     return renderError(error);
   }
+};
+
+export const createPropertyAction = async (
+  prevState: unknown,
+  formData: FormData
+): Promise<{ message: string }> => {
+  // const user = await getAuthUser();
+  try {
+    const rawData = Object.fromEntries(formData);
+    // const file = formData.get('image') as File;
+    // const validatedFile = validateWithZodSchema(imageSchema, {
+    //   image: file,
+    // });
+    // const fullPath = await uploadImage(validatedFile.image);
+    // console.log(rawData);
+
+    const validatedFields = validateWithZodSchema(propertySchema, rawData);
+    console.log(validatedFields);
+    // await db.property.create({
+    //   data: {
+    //     ...validatedFields,
+    //     image: fullPath,
+    //     profileId: user.id,
+    //   },
+    // });
+
+    return { message: 'Property created successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
+  redirect('/');
 };
