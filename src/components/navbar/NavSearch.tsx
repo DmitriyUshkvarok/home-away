@@ -22,10 +22,19 @@ const NavSearch = () => {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 
+  // useEffect(() => {
+  //   if (!searchParams.get('search')) {
+  //     setSearch('');
+  //   }
+  // }, [searchParams]);
   useEffect(() => {
-    if (!searchParams.get('search')) {
-      setSearch('');
-    }
+    // Асинхронная обработка параметров, если потребуется
+    const loadSearchParams = async () => {
+      const searchValue = await searchParams.get('search');
+      setSearch(searchValue || '');
+    };
+
+    loadSearchParams();
   }, [searchParams]);
   return (
     <Input
