@@ -1,13 +1,26 @@
 import { fetchPropertyDetails } from '@/actions/actions';
 import FavoriteToggleButton from '@/components/card/FavoriteToggleButton';
 import PropertyRating from '@/components/card/PropertyRating';
+import Amenities from '@/components/properties/Amenities';
 import BookingCalendar from '@/components/properties/BookingCalendar';
 import BreadCrumbs from '@/components/properties/BreadCrumbs';
+import Description from '@/components/properties/Description';
 import ImageContainer from '@/components/properties/ImageContainer';
 import PropertyDetails from '@/components/properties/PropertyDetails';
 import ShareButton from '@/components/properties/ShareButton';
 import UserInfo from '@/components/properties/UserInfo';
+import { Separator } from '@/components/ui/separator';
+// import { Skeleton } from '@/components/ui/skeleton';
+// import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
+import ClientMapWrapper from '@/components/properties/ClientMapWrapper';
+
+// const DynamicMap = dynamic(
+//   () => import('@/components/properties/PropertyMap'),
+//   {
+//     loading: () => <Skeleton className="h-[400px] w-full" />,
+//   }
+// );
 
 const DynamicPropertiesPage = async ({
   params,
@@ -41,6 +54,10 @@ const DynamicPropertiesPage = async ({
           </div>
           <PropertyDetails details={details} />
           <UserInfo profile={{ firstName, profileImage }} />
+          <Separator className="mt-4" />
+          <Description description={property.description} />
+          <Amenities amenities={property.amenities} />
+          <ClientMapWrapper countryCode={property.country} />
         </div>
         <div className="lg:col-span-4 flex flex-col items-center">
           <BookingCalendar />
