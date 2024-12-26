@@ -1,7 +1,6 @@
 'use client';
-
 import dynamic from 'next/dynamic';
-import { Skeleton } from '../ui/skeleton';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const DynamicMap = dynamic(
   () => import('@/components/properties/PropertyMap'),

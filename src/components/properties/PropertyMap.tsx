@@ -16,6 +16,7 @@ const markerIcon = icon({
 const PropertyMap = ({ countryCode }: { countryCode: string }) => {
   const defaultLocation = [51.505, -0.09] as [number, number];
   const location = findCountryByCode(countryCode)?.location as [number, number];
+
   return (
     <div className="mt-4">
       <div className="mb-4 ">

@@ -10,17 +10,10 @@ import PropertyDetails from '@/components/properties/PropertyDetails';
 import ShareButton from '@/components/properties/ShareButton';
 import UserInfo from '@/components/properties/UserInfo';
 import { Separator } from '@/components/ui/separator';
-// import { Skeleton } from '@/components/ui/skeleton';
-// import dynamic from 'next/dynamic';
 import { redirect } from 'next/navigation';
-import ClientMapWrapper from '@/components/properties/ClientMapWrapper';
-
-// const DynamicMap = dynamic(
-//   () => import('@/components/properties/PropertyMap'),
-//   {
-//     loading: () => <Skeleton className="h-[400px] w-full" />,
-//   }
-// );
+import DynamicMap from '@/components/properties/ClientMapWrapper';
+import SubmitReview from '@/components/reviews/SubmitReview';
+import PropertyReviews from '@/components/reviews/PropertyReviews';
 
 const DynamicPropertiesPage = async ({
   params,
@@ -57,12 +50,14 @@ const DynamicPropertiesPage = async ({
           <Separator className="mt-4" />
           <Description description={property.description} />
           <Amenities amenities={property.amenities} />
-          <ClientMapWrapper countryCode={property.country} />
+          <DynamicMap countryCode={property.country} />
         </div>
         <div className="lg:col-span-4 flex flex-col items-center">
           <BookingCalendar />
         </div>
       </section>
+      <SubmitReview propertyId={property.id} />
+      <PropertyReviews propertyId={property.id} />
     </section>
   );
 };
