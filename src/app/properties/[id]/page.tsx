@@ -1,8 +1,8 @@
-import { fetchPropertyDetails } from '@/actions/actions';
+import { fetchPropertyDetails, findExistingReview } from '@/actions/actions';
+import { auth } from '@clerk/nextjs/server';
 import FavoriteToggleButton from '@/components/card/FavoriteToggleButton';
 import PropertyRating from '@/components/card/PropertyRating';
 import Amenities from '@/components/properties/Amenities';
-import BookingCalendar from '@/components/properties/BookingCalendar';
 import BreadCrumbs from '@/components/properties/BreadCrumbs';
 import Description from '@/components/properties/Description';
 import ImageContainer from '@/components/properties/ImageContainer';
@@ -21,6 +21,7 @@ const DynamicPropertiesPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
+
   const property = await fetchPropertyDetails(id);
   if (!property) redirect('/');
   const { baths, bedrooms, beds, guests } = property;
@@ -28,6 +29,12 @@ const DynamicPropertiesPage = async ({
 
   const firstName = property.profile.firstName;
   const profileImage = property.profile.profileImage;
+
+  const { userId } = await auth();
+  const isNotOwner = property.profile.clerkId !== userId;
+  const reviewDoesNotExist =
+    userId && isNotOwner && !(await findExistingReview(userId, property.id));
+
   return (
     <section>
       <BreadCrumbs name={property.name} />
@@ -53,10 +60,10 @@ const DynamicPropertiesPage = async ({
           <DynamicMap countryCode={property.country} />
         </div>
         <div className="lg:col-span-4 flex flex-col items-center">
-          <BookingCalendar />
+          {/* <BookingCalendar /> */}
         </div>
       </section>
-      <SubmitReview propertyId={property.id} />
+      {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
       <PropertyReviews propertyId={property.id} />
     </section>
   );
