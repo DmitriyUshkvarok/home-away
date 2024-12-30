@@ -14,6 +14,7 @@ import { redirect } from 'next/navigation';
 import DynamicMap from '@/components/properties/ClientMapWrapper';
 import SubmitReview from '@/components/reviews/SubmitReview';
 import PropertyReviews from '@/components/reviews/PropertyReviews';
+import BookingWrapper from '@/components/booking/BookingWrapper';
 
 const DynamicPropertiesPage = async ({
   params,
@@ -60,7 +61,11 @@ const DynamicPropertiesPage = async ({
           <DynamicMap countryCode={property.country} />
         </div>
         <div className="lg:col-span-4 flex flex-col items-center">
-          {/* <BookingCalendar /> */}
+          <BookingWrapper
+            propertyId={property.id}
+            price={property.price}
+            bookings={property.Booking}
+          />
         </div>
       </section>
       {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
