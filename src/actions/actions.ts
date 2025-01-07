@@ -221,6 +221,18 @@ export const toggleFavoriteAction = async (prevState: {
 }) => {
   const user = await getAuthUser();
   const { propertyId, favoriteId, pathname } = prevState;
+
+  // Проверяем, есть ли у пользователя профиль в базе данных
+  const userProfile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  });
+
+  if (!userProfile) {
+    return redirect('/profile/create');
+  }
+
   try {
     if (favoriteId) {
       await db.favorite.delete({
