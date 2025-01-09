@@ -1,0 +1,22 @@
+{
+  "NavSearch": {
+    "placeholder": "Find a property..."
+  },
+  "NavLinks": {
+    "home": "Home",
+    "favorites": "Favorites",
+    "bookings": "Bookings",
+    "reviews": "Reviews",
+    "reservations": "Reservations",
+    "createRental": "Create Rental",
+    "myRentals": "My Rentals",
+    "admin": "Admin",
+    "profile": "Profile"
+  },
+  "Auth": {
+    "logout": "Logout",
+    "logoutSuccess": "You have been signed out.",
+    "login": "Login",
+    "register": "Register"
+  }
+}

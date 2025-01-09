@@ -12,7 +12,7 @@ async function HomePage({
 
   return (
     <section>
-      <h1 className="text-3xl">HomePage</h1>
+      <h1 className="hiddenTitle">HomePage</h1>
       <CategoriesList category={category} search={search} />
       <Suspense fallback={<LoadingCards />}>
         <PropertiesContainer category={category} search={search} />

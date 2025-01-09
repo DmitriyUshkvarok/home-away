@@ -230,7 +230,9 @@ export const toggleFavoriteAction = async (prevState: {
   });
 
   if (!userProfile) {
-    return redirect('/profile/create');
+    const localeMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
+    const locale = localeMatch ? localeMatch[1] : 'en'; // Локаль по умолчанию
+    return redirect(`/${locale}/profile/create`);
   }
 
   try {

@@ -1,0 +1,22 @@
+{
+  "NavSearch": {
+    "placeholder": "Знайти нерухомість..."
+  },
+  "NavLinks": {
+    "home": "Головна",
+    "favorites": "Улюблене",
+    "bookings": "Бронювання",
+    "reviews": "Відгуки",
+    "reservations": "Резервування",
+    "createRental": "Додати оголошення",
+    "myRentals": "Мої оголошення",
+    "admin": "Адмін",
+    "profile": "Профіль"
+  },
+  "Auth": {
+    "logout": "Вийти",
+    "logoutSuccess": "Ви вийшли з системи.",
+    "login": "Увійти",
+    "register": "Реєстрація"
+  }
+}

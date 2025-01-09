@@ -3,10 +3,11 @@ import { Input } from '../ui/input';
 import { useSearchParams, /* usePathname,*/ useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 const NavSearch = () => {
   const searchParams = useSearchParams();
-  // const pathname = usePathname();
+  const t = useTranslations('NavSearch');
   const { replace } = useRouter();
   const [search, setSearch] = useState(
     searchParams.get('search')?.toString() || ''
@@ -31,7 +32,7 @@ const NavSearch = () => {
   return (
     <Input
       type="search"
-      placeholder="find a property..."
+      placeholder={t('placeholder')}
       className="max-w-xs dark:bg-muted "
       onChange={(e) => {
         setSearch(e.target.value);
