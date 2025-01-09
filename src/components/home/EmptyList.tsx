@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
-const EmptyList = ({
+const EmptyList = async ({
   heading = 'No items in the list.',
   message = 'Keep exploring our properties.',
   btnText = 'back home',

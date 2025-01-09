@@ -18,5 +18,22 @@
     "logoutSuccess": "You have been signed out.",
     "login": "Login",
     "register": "Register"
+  },
+  "Categories": {
+    "cabin": "Cabin",
+    "tent": "Tent",
+    "airstream": "Airstream",
+    "cottage": "Cottage",
+    "container": "Container",
+    "caravan": "Caravan",
+    "tiny": "Tiny",
+    "magic": "Magic",
+    "warehouse": "Warehouse",
+    "lodge": "Lodge"
+  },
+  "Properties": {
+    "noResultsHeading": "No results.",
+    "noResultsMessage": "Try changing or removing some of your filters.",
+    "clearFiltersButton": "Clear Filters"
   }
 }

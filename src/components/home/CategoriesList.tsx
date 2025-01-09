@@ -1,14 +1,16 @@
 import { categories } from '@/utils/categories';
 import { ScrollArea, ScrollBar } from '../ui/scroll-area';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-const CategoriesList = ({
+const CategoriesList = async ({
   category,
   search,
 }: {
   category?: string;
   search?: string;
 }) => {
+  const t = await getTranslations('Categories');
   const searchTerm = search ? `&search=${search}` : '';
   return (
     <section>
@@ -27,7 +29,7 @@ const CategoriesList = ({
                   }`}
                 >
                   <item.icon className="w-8 h-8 " />
-                  <p className="capitalize text-sm mt-1">{item.label}</p>
+                  <p className="capitalize text-sm mt-1"> {t(item.label)} </p>
                 </article>
               </Link>
             );

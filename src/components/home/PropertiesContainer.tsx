@@ -2,6 +2,7 @@ import { fetchProperties } from '@/actions/actions';
 import PropertiesList from './PropertiesList';
 import EmptyList from './EmptyList';
 import type { PropertyCardProps } from '@/utils/types';
+import { getTranslations } from 'next-intl/server';
 
 const PropertiesContainer = async ({
   category,
@@ -14,13 +15,14 @@ const PropertiesContainer = async ({
     category,
     search,
   });
+  const t = await getTranslations('Properties');
 
   if (properties.length === 0) {
     return (
       <EmptyList
-        heading="No results."
-        message="Try changing or removing some of your filters."
-        btnText="Clear Filters"
+        heading={t('noResultsHeading')}
+        message={t('noResultsMessage')}
+        btnText={t('clearFiltersButton')}
       />
     );
   }

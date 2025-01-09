@@ -18,5 +18,22 @@
     "logoutSuccess": "Ви вийшли з системи.",
     "login": "Увійти",
     "register": "Реєстрація"
+  },
+  "Categories": {
+    "cabin": "Хатина",
+    "tent": "Намет",
+    "airstream": "Кемпер",
+    "cottage": "Котедж",
+    "container": "Контейнер",
+    "caravan": "Караван",
+    "tiny": "Маяк",
+    "magic": "Чарівний",
+    "warehouse": "Склад",
+    "lodge": "Будиночок"
+  },
+  "Properties": {
+    "noResultsHeading": "Результати не знайдені.",
+    "noResultsMessage": "Спробуйте змінити або видалити деякі фільтри.",
+    "clearFiltersButton": "Очистити фільтри"
   }
 }

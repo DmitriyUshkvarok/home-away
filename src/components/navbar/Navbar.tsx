@@ -1,6 +1,7 @@
 import NavSearch from './NavSearch';
 import LinksDropdown from './LinksDropdown';
 import DarkMode from './DarkMode';
+import LocaleSwitcher from './LocaleSwitcher';
 import Logo from './Logo';
 import { Suspense } from 'react';
 
@@ -13,6 +14,7 @@ const Navbar = () => {
           <NavSearch />
         </Suspense>
         <div className="flex gap-4 items-center ">
+          <LocaleSwitcher />
           <DarkMode />
           <LinksDropdown />
         </div>
