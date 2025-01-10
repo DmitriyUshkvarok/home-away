@@ -35,5 +35,50 @@
     "noResultsHeading": "Результати не знайдені.",
     "noResultsMessage": "Спробуйте змінити або видалити деякі фільтри.",
     "clearFiltersButton": "Очистити фільтри"
+  },
+  "CreateProfilePage": {
+    "heading": "Новий користувач",
+    "form": {
+      "firstName": "Ім'я",
+      "lastName": "Прізвище",
+      "username": "Ім'я користувача",
+      "submitButton": "Створити профіль"
+    }
+  },
+  "EmptyList": {
+    "heading": "Немає елементів у списку.",
+    "message": "Продовжуйте досліджувати наші об'єкти.",
+    "btnText": "На головну"
+  },
+  "Breadcrumbs": {
+    "home": "Головна"
+  },
+  "DarkMode": {
+    "light": "Світла",
+    "dark": "Темна",
+    "system": "Системна"
+  },
+  "DescriptionDynamicProperty": {
+    "title": "Опис",
+    "showMore": "Показати більше",
+    "showLess": "Сховати"
+  },
+  "PropertyDetails": {
+    "bedroom": {
+      "one": "спальня",
+      "other": "спальні"
+    },
+    "bath": {
+      "one": "ванна",
+      "other": "ванни"
+    },
+    "guest": {
+      "one": "гість",
+      "other": "гості"
+    },
+    "bed": {
+      "one": "ліжко",
+      "other": "ліжка"
+    }
   }
 }

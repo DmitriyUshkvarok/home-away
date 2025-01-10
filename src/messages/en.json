@@ -35,5 +35,50 @@
     "noResultsHeading": "No results.",
     "noResultsMessage": "Try changing or removing some of your filters.",
     "clearFiltersButton": "Clear Filters"
+  },
+  "CreateProfilePage": {
+    "heading": "New User",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "username": "Username",
+      "submitButton": "Create Profile"
+    }
+  },
+  "EmptyList": {
+    "heading": "No items in the list.",
+    "message": "Keep exploring our properties.",
+    "btnText": "Back home"
+  },
+  "Breadcrumbs": {
+    "home": "Home"
+  },
+  "DarkMode": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "DescriptionDynamicProperty": {
+    "title": "Description",
+    "showMore": "Show more",
+    "showLess": "Show less"
+  },
+  "PropertyDetails": {
+    "bedroom": {
+      "one": "bedroom",
+      "other": "bedrooms"
+    },
+    "bath": {
+      "one": "bath",
+      "other": "baths"
+    },
+    "guest": {
+      "one": "guest",
+      "other": "guests"
+    },
+    "bed": {
+      "one": "bed",
+      "other": "beds"
+    }
   }
 }

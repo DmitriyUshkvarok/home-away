@@ -7,9 +7,11 @@ import RatingInput from '@/components/form/RatingInput';
 import TextAreaInput from '@/components/form/TextAreaInput';
 import { Button } from '@/components/ui/button';
 import { createReviewAction } from '@/actions/actions';
+import { usePathname } from 'next/navigation';
 
 const SubmitReview = ({ propertyId }: { propertyId: string }) => {
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
+  const pathname = usePathname();
   return (
     <div className="mt-8">
       <Button onClick={() => setIsReviewFormVisible((prev) => !prev)}>
@@ -19,6 +21,7 @@ const SubmitReview = ({ propertyId }: { propertyId: string }) => {
         <Card className="p-8 mt-8">
           <FormContainer action={createReviewAction}>
             <input type="hidden" name="propertyId" value={propertyId} />
+            <input type="hidden" name="pathname" value={pathname} />
             <RatingInput name="rating" />
             <TextAreaInput
               name="comment"

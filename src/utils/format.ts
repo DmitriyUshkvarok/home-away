@@ -8,8 +8,16 @@ export const formatCurrency = (amount: number | null) => {
   }).format(value);
 };
 
-export function formatQuantity(quantity: number, noun: string): string {
-  return quantity === 1 ? `${quantity} ${noun}` : `${quantity} ${noun}s`;
+// export function formatQuantity(quantity: number, noun: { one: string; other: string }): string {
+//   return quantity === 1 ? `${quantity} ${noun.one}` : `${quantity} ${noun.other}`;
+// }
+export function formatQuantity(
+  quantity: number,
+  noun: { one: string; other: string }
+): string {
+  return quantity === 1
+    ? `${quantity} ${noun.one}`
+    : `${quantity} ${noun.other}`;
 }
 
 export const formatDate = (date: Date, onlyMonth?: boolean) => {

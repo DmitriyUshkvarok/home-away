@@ -9,8 +9,13 @@ import CountriesInput from '@/components/form/CountriesInput';
 import ImageInput from '@/components/form/ImageInput';
 import CounterInput from '@/components/form/CounterInput';
 import AmenitiesInput from '@/components/form/AmenitiesInput';
+import { headers } from 'next/headers';
 
-function CreateProperty() {
+async function CreateProperty() {
+  const headersList = await headers();
+  const referer = headersList.get('referer');
+  const pathname = referer ? new URL(referer).pathname : '/';
+
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">
@@ -20,6 +25,7 @@ function CreateProperty() {
         <h3 className="text-lg mb-4 font-medium">General Info</h3>
         <FormContainer action={createPropertyAction}>
           <div className="grid md:grid-cols-2 gap-8 mb-4">
+            <input name="pathname" type="hidden" value={pathname} />
             <FormInput
               name="name"
               type="text"

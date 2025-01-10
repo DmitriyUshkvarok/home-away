@@ -146,6 +146,19 @@ export const createPropertyAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const pathname = formData.get('pathname') as string;
+
+  const userProfile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  });
+
+  if (!userProfile) {
+    const localeMatch = pathname?.match(/^\/([a-z]{2})(\/|$)/);
+    const locale = localeMatch ? localeMatch[1] : 'en';
+    return redirect(`/${locale}/profile/create`);
+  }
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get('image') as File;
@@ -301,6 +314,19 @@ export const createReviewAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const pathname = formData.get('pathname') as string;
+
+  const userProfile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  });
+
+  if (!userProfile) {
+    const localeMatch = pathname?.match(/^\/([a-z]{2})(\/|$)/);
+    const locale = localeMatch ? localeMatch[1] : 'en';
+    return redirect(`/${locale}/profile/create`);
+  }
   try {
     const rawData = Object.fromEntries(formData);
     const validatedFields = validateWithZodSchema(createReviewSchema, rawData);

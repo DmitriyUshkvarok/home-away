@@ -1,21 +1,22 @@
 import { Button } from '../ui/button';
 import Link from 'next/link';
-
+import { getTranslations } from 'next-intl/server';
 const EmptyList = async ({
-  heading = 'No items in the list.',
-  message = 'Keep exploring our properties.',
-  btnText = 'back home',
+  heading,
+  message,
+  btnText,
 }: {
   heading?: string;
   message?: string;
   btnText?: string;
 }) => {
+  const t = await getTranslations('EmptyList');
   return (
     <div className="mt-4">
-      <h2 className="text-xl font-bold ">{heading}</h2>
-      <p className="text-lg">{message}</p>
+      <h2 className="text-xl font-bold ">{heading || t('heading')}</h2>
+      <p className="text-lg">{message || t('message')}</p>
       <Button asChild className="mt-4 capitalize" size="lg">
-        <Link href="/">{btnText}</Link>
+        <Link href="/">{btnText || t('btnText')}</Link>
       </Button>
     </div>
   );
