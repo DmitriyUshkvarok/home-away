@@ -5,10 +5,12 @@ import PropertyRating from './PropertyRating';
 import FavoriteToggleButton from './FavoriteToggleButton';
 import { PropertyCardProps } from '@/utils/types';
 import { formatCurrency } from '@/utils/format';
+import { getTranslations } from 'next-intl/server';
 
-const PropertyCard = ({ property }: { property: PropertyCardProps }) => {
+const PropertyCard = async ({ property }: { property: PropertyCardProps }) => {
   const { name, image, price } = property;
   const { country, id: propertyId, tagline } = property;
+  const t = await getTranslations('PropertyCard');
   return (
     <article className="group relative">
       <Link href={`/properties/${propertyId}`}>
@@ -34,7 +36,7 @@ const PropertyCard = ({ property }: { property: PropertyCardProps }) => {
         <div className="flex justify-between items-center mt-1">
           <p className="text-sm mt-1 ">
             <span className="font-semibold">{formatCurrency(price)} </span>
-            night
+            {t('night')}
           </p>
           {/* country and flag */}
           <CountryFlagAndName countryCode={country} />

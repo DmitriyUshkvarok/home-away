@@ -2,6 +2,7 @@
 
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { useFormStatus } from 'react-dom';
+import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { SignInButton } from '@clerk/nextjs';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
@@ -22,6 +23,7 @@ export function SubmitButton({
   size = 'lg',
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
+  const t = useTranslations('SubmitButton');
 
   return (
     <Button
@@ -33,10 +35,10 @@ export function SubmitButton({
       {pending ? (
         <>
           <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-          Please wait...
+          {t('pleaseWait')}
         </>
       ) : (
-        text
+        t('submit') || text
       )}
     </Button>
   );

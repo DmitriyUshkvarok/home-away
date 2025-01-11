@@ -13,6 +13,7 @@ import {
 import { uploadImage } from '@/utils/supabase';
 import { calculateTotals } from '@/utils/calculateTotals';
 import { formatDate } from '@/utils/format';
+import { getTranslations } from 'next-intl/server';
 
 const renderError = (error: unknown): { message: string } => {
   console.log(error);
@@ -123,6 +124,7 @@ export const updateProfileImageAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const t = await getTranslations('UpdateProfileImage');
   try {
     const image = formData.get('image') as File;
     const validatedFields = validateWithZodSchema(imageSchema, { image });
@@ -135,7 +137,7 @@ export const updateProfileImageAction = async (
       data: { profileImage: fullPath },
     });
     revalidatePath('/profile');
-    return { message: 'Profile image updated successfully' };
+    return { message: t('success') };
   } catch (error) {
     return renderError(error);
   }

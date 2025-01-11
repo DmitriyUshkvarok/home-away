@@ -1,7 +1,10 @@
 import { Amenity } from '@/utils/amenities';
 import { LuFolderCheck } from 'react-icons/lu';
 import Title from './Title';
-const Amenities = ({ amenities }: { amenities: string }) => {
+import { getTranslations } from 'next-intl/server';
+
+const Amenities = async ({ amenities }: { amenities: string }) => {
+  const t = await getTranslations('Amenities');
   const amenitiesList: Amenity[] = JSON.parse(amenities as string);
   const noAmenities = amenitiesList.every((amenity) => !amenity.selected);
 
@@ -11,7 +14,7 @@ const Amenities = ({ amenities }: { amenities: string }) => {
 
   return (
     <div className="mt-4">
-      <Title text="What this place offers" />
+      <Title text={t('title')} />
       <div className="grid md:grid-cols-2 gap-x-4">
         {amenitiesList.map((amenity) => {
           if (!amenity.selected) {

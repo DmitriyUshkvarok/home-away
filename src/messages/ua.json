@@ -80,5 +80,51 @@
       "one": "ліжко",
       "other": "ліжка"
     }
+  },
+  "UserInfo": {
+    "hostedBy": "Приймає",
+    "superhostDetails": "Суперхост · {years} років гостинності"
+  },
+  "PropertyCard": {
+    "night": "ніч"
+  },
+  "Amenities": {
+    "title": "Що пропонує це місце"
+  },
+  "SubmitReview": {
+    "leaveReview": "Залишити відгук",
+    "commentLabel": "Ваші враження про цю нерухомість",
+    "defaultComment": "Дивовижне місце !!!",
+    "submitButton": "Надіслати"
+  },
+  "Rating": {
+    "rating": "Рейтинг"
+  },
+  "BookingForm": {
+    "summary": "Підсумок",
+    "nights": "ночей",
+    "cleaningFee": "Плата за прибирання",
+    "serviceFee": "Плата за обслуговування",
+    "tax": "Податок",
+    "bookingTotal": "Загальна сума"
+  },
+  "ConfirmBooking": {
+    "signInToBook": "Увійдіть, щоб завершити бронювання",
+    "reserve": "Забронювати"
+  },
+  "ProfilePage": {
+    "title": "Профіль користувача",
+    "updateProfileImage": "Оновити зображення профілю",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "username": "Ім'я користувача",
+    "updateProfile": "Оновити профіль"
+  },
+  "SubmitButton": {
+    "submit": "Відправити",
+    "pleaseWait": "Будь ласка, зачекайте..."
+  },
+  "UpdateProfileImage": {
+    "success": "Зображення профілю успішно оновлено"
   }
 }

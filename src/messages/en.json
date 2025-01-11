@@ -80,5 +80,51 @@
       "one": "bed",
       "other": "beds"
     }
+  },
+  "UserInfo": {
+    "hostedBy": "Hosted by",
+    "superhostDetails": "Superhost · {years} years hosting"
+  },
+  "PropertyCard": {
+    "night": "night"
+  },
+  "Amenities": {
+    "title": "What this place offers"
+  },
+  "SubmitReview": {
+    "leaveReview": "Leave a Review",
+    "commentLabel": "Your thoughts on this property",
+    "defaultComment": "Amazing place !!!",
+    "submitButton": "Submit"
+  },
+  "Rating": {
+    "rating": "rating"
+  },
+  "BookingForm": {
+    "summary": "Summary",
+    "nights": "nights",
+    "cleaningFee": "Cleaning Fee",
+    "serviceFee": "Service Fee",
+    "tax": "Tax",
+    "bookingTotal": "Booking Total"
+  },
+  "ConfirmBooking": {
+    "signInToBook": "Sign In to Complete Booking",
+    "reserve": "Reserve"
+  },
+  "ProfilePage": {
+    "title": "User Profile",
+    "updateProfileImage": "Update Profile Image",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "updateProfile": "Update Profile"
+  },
+  "SubmitButton": {
+    "submit": "Submit",
+    "pleaseWait": "Please wait..."
+  },
+  "UpdateProfileImage": {
+    "success": "Profile image updated successfully"
   }
 }

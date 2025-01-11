@@ -8,14 +8,16 @@ import TextAreaInput from '@/components/form/TextAreaInput';
 import { Button } from '@/components/ui/button';
 import { createReviewAction } from '@/actions/actions';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const SubmitReview = ({ propertyId }: { propertyId: string }) => {
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
+  const t = useTranslations('SubmitReview');
   const pathname = usePathname();
   return (
     <div className="mt-8">
       <Button onClick={() => setIsReviewFormVisible((prev) => !prev)}>
-        Leave a Review
+        {t('leaveReview')}
       </Button>
       {isReviewFormVisible && (
         <Card className="p-8 mt-8">
@@ -25,10 +27,10 @@ const SubmitReview = ({ propertyId }: { propertyId: string }) => {
             <RatingInput name="rating" />
             <TextAreaInput
               name="comment"
-              labelText="your thoughts on this property"
-              defaultValue="Amazing place !!!"
+              labelText={t('commentLabel')}
+              defaultValue={t('defaultComment')}
             />
-            <SubmitButton text="Submit" className="mt-4" />
+            <SubmitButton text={t('submitButton')} className="mt-4" />
           </FormContainer>
         </Card>
       )}

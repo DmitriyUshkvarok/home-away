@@ -5,31 +5,35 @@ import { useProperty } from '@/utils/store';
 import FormContainer from '@/components/form/FormContainer';
 import { SubmitButton } from '@/components/form/Buttons';
 import { createBookingAction } from '@/actions/actions';
+import { useTranslations } from 'next-intl';
 
 const ConfirmBooking = () => {
   const { userId } = useAuth();
   const { propertyId, range } = useProperty((state) => state);
   const checkIn = range?.from as Date;
   const checkOut = range?.to as Date;
-  if (!userId)
-    return (
-      <SignInButton mode="modal">
-        <Button type="button" className="w-full">
-          Sign In to Complete Booking
-        </Button>
-      </SignInButton>
-    );
+  const t = useTranslations('ConfirmBooking');
   const createBooking = createBookingAction.bind(null, {
     propertyId,
     checkIn,
     checkOut,
   });
   return (
-    <section>
-      <FormContainer action={createBooking}>
-        <SubmitButton text="Reserve" className="w-full" />
-      </FormContainer>
-    </section>
+    <>
+      {!userId ? (
+        <SignInButton mode="modal">
+          <Button type="button" className="w-full">
+            {t('signInToBook')}
+          </Button>
+        </SignInButton>
+      ) : (
+        <section>
+          <FormContainer action={createBooking}>
+            <SubmitButton text={t('reserve')} className="w-full" />
+          </FormContainer>
+        </section>
+      )}
+    </>
   );
 };
 

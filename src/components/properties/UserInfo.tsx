@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
 type UserInfoProps = {
   profile: {
@@ -7,7 +8,10 @@ type UserInfoProps = {
   };
 };
 
-const UserInfo = ({ profile: { profileImage, firstName } }: UserInfoProps) => {
+const UserInfo = async ({
+  profile: { profileImage, firstName },
+}: UserInfoProps) => {
+  const t = await getTranslations('UserInfo');
   return (
     <article className="grid grid-cols-[auto,1fr] gap-4 mt-4">
       <Image
@@ -19,11 +23,11 @@ const UserInfo = ({ profile: { profileImage, firstName } }: UserInfoProps) => {
       />
       <div>
         <p>
-          Hosted by
+          {t('hostedBy')}
           <span className="font-bold"> {firstName}</span>
         </p>
         <p className="text-muted-foreground font-light">
-          Superhost &middot; 2 years hosting
+          {t('superhostDetails', { years: 2 })}
         </p>
       </div>
     </article>

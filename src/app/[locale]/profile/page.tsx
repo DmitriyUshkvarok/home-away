@@ -7,42 +7,44 @@ import {
   updateProfileImageAction,
 } from '@/actions/actions';
 import ImageInputContainer from '@/components/form/ImageInputContainer';
+import { getTranslations } from 'next-intl/server';
 
 const ProfilePage = async () => {
   const profile = await fetchProfile();
+  const t = await getTranslations('ProfilePage');
 
   return (
     <section>
-      <h1 className="text-2xl font-semibold mb-8 capitalize">user profile</h1>
+      <h1 className="text-2xl font-semibold mb-8 capitalize">{t('title')}</h1>
       <div className="border p-8 rounded-md">
         <ImageInputContainer
           image={profile.profileImage}
           name={profile.username}
           action={updateProfileImageAction}
-          text="Update Profile Image"
+          text={t('updateProfileImage')}
         />
         <FormContainer action={updateProfileAction}>
           <div className="grid gap-4 md:grid-cols-2 mt-4 ">
             <FormInput
               type="text"
               name="firstName"
-              label="First Name"
+              label={t('firstName')}
               defaultValue={profile?.firstName}
             />
             <FormInput
               type="text"
               name="lastName"
-              label="Last Name"
+              label={t('lastName')}
               defaultValue={profile?.lastName}
             />
             <FormInput
               type="text"
               name="username"
-              label="Username"
+              label={t('username')}
               defaultValue={profile?.username}
             />
           </div>
-          <SubmitButton text="Update Profile" className="mt-8" />
+          <SubmitButton text={t('updateProfile')} className="mt-8" />
         </FormContainer>
       </div>
     </section>

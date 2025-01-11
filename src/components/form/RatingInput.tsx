@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useTranslations } from 'next-intl';
 const RatingInput = ({
   name,
   labelText,
@@ -13,6 +14,7 @@ const RatingInput = ({
   name: string;
   labelText?: string;
 }) => {
+  const t = useTranslations('Rating');
   const numbers = Array.from({ length: 5 }, (_, i) => {
     const value = i + 1;
     return value.toString();
@@ -20,7 +22,7 @@ const RatingInput = ({
   return (
     <div className="mb-2 max-w-xs">
       <Label htmlFor={name} className="capitalize">
-        {labelText || name}
+        {labelText || t('rating')}
       </Label>
       <Select defaultValue={numbers[0]} name={name} required>
         <SelectTrigger>
