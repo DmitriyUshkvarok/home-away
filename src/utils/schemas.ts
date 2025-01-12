@@ -1,22 +1,27 @@
+import { getTranslations } from 'next-intl/server';
 import * as z from 'zod';
 import { ZodSchema } from 'zod';
 
-export const profileSchema = z.object({
-  firstName: z.string().min(2, {
-    message: 'first name must be at least 2 characters',
-  }),
-  lastName: z.string().min(2, {
-    message: 'last name must be at least 2 characters',
-  }),
-  username: z.string().min(2, {
-    message: 'username must be at least 2 characters',
-  }),
-});
+export const profileSchema = async () => {
+  const t = await getTranslations('ProfileValidation');
+  return z.object({
+    firstName: z.string().min(2, {
+      message: t('firstNameMin'),
+    }),
+    lastName: z.string().min(2, {
+      message: t('lastNameMin'),
+    }),
+    username: z.string().min(2, {
+      message: t('usernameMin'),
+    }),
+  });
+};
 
-export function validateWithZodSchema<T>(
-  schema: ZodSchema<T>,
+export async function validateWithZodSchema<T>(
+  schemaPromise: Promise<ZodSchema<T>>,
   data: unknown
-): T {
+): Promise<T> {
+  const schema = await schemaPromise;
   const result = schema.safeParse(data);
 
   if (!result.success) {
@@ -26,73 +31,111 @@ export function validateWithZodSchema<T>(
   return result.data;
 }
 
-export const imageSchema = z.object({
-  image: validateFile(),
-});
+export const imageSchema = (t: (key: string) => string) => {
+  const maxUploadSize = 1024 * 1024; // 1 MB
+  const acceptedFileTypes = ['image/'];
 
-function validateFile() {
-  const maxUploadSize = 1024 * 1024;
-  const acceptedFilesTypes = ['image/'];
-  return z
-    .instanceof(File)
-    .refine((file) => {
-      return !file || file.size <= maxUploadSize;
-    }, 'File size must be less than 1 MB')
-    .refine((file) => {
-      return (
-        !file || acceptedFilesTypes.some((type) => file.type.startsWith(type))
-      );
-    }, 'File must be an image');
-}
+  return z.object({
+    image: z
+      .instanceof(File)
+      .refine(
+        (file) => !file || file.size <= maxUploadSize,
+        t('sizeLimitExceeded')
+      )
+      .refine(
+        (file) =>
+          !file || acceptedFileTypes.some((type) => file.type.startsWith(type)),
+        t('invalidFileType')
+      ),
+  });
+};
 
-export const propertySchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: 'name must be at least 2 characters.',
-    })
-    .max(100, {
-      message: 'name must be less than 100 characters.',
+export const propertySchema = async () => {
+  const t = await getTranslations('PropertyValidation');
+  return z.object({
+    name: z
+      .string()
+      .min(2, {
+        message: t('nameMin'),
+      })
+      .max(100, {
+        message: t('nameMax'),
+      }),
+    tagline: z
+      .string()
+      .min(2, {
+        message: t('taglineMin'),
+      })
+      .max(100, {
+        message: t('taglineMax'),
+      }),
+    price: z.coerce
+      .number()
+      .int()
+      .min(0, {
+        message: t('priceMin'),
+      }),
+    category: z.string(),
+    description: z.string().refine(
+      (description) => {
+        const wordCount = description.split(' ').length;
+        return wordCount >= 10 && wordCount <= 1000;
+      },
+      {
+        message: t('descriptionWords'),
+      }
+    ),
+    country: z.string(),
+    guests: z.coerce
+      .number()
+      .int()
+      .min(0, {
+        message: t('guestsMin'),
+      }),
+    bedrooms: z.coerce
+      .number()
+      .int()
+      .min(0, {
+        message: t('bedroomsMin'),
+      }),
+    beds: z.coerce
+      .number()
+      .int()
+      .min(0, {
+        message: t('bedsMin'),
+      }),
+    baths: z.coerce
+      .number()
+      .int()
+      .min(0, {
+        message: t('bathsMin'),
+      }),
+    amenities: z.string(),
+  });
+};
+
+export const createReviewSchema = async () => {
+  const t = await getTranslations('ReviewValidation');
+  return z.object({
+    propertyId: z.string().nonempty({
+      message: t('propertyIdRequired'),
     }),
-  tagline: z
-    .string()
-    .min(2, {
-      message: 'tagline must be at least 2 characters.',
-    })
-    .max(100, {
-      message: 'tagline must be less than 100 characters.',
-    }),
-  price: z.coerce.number().int().min(0, {
-    message: 'price must be a positive number.',
-  }),
-  category: z.string(),
-  description: z.string().refine(
-    (description) => {
-      const wordCount = description.split(' ').length;
-      return wordCount >= 10 && wordCount <= 1000;
-    },
-    {
-      message: 'description must be between 10 and 1000 words.',
-    }
-  ),
-  country: z.string(),
-  guests: z.coerce.number().int().min(0, {
-    message: 'guest amount must be a positive number.',
-  }),
-  bedrooms: z.coerce.number().int().min(0, {
-    message: 'bedrooms amount must be a positive number.',
-  }),
-  beds: z.coerce.number().int().min(0, {
-    message: 'beds amount must be a positive number.',
-  }),
-  baths: z.coerce.number().int().min(0, {
-    message: 'bahts amount must be a positive number.',
-  }),
-  amenities: z.string(),
-});
-
-export const createReviewSchema = z.object({
-  propertyId: z.string(),
-  rating: z.coerce.number().int().min(1).max(5),
-  comment: z.string().min(10).max(1000),
-});
+    rating: z.coerce
+      .number()
+      .int()
+      .min(1, {
+        message: t('ratingRange'),
+      })
+      .max(5, {
+        message: t('ratingRange'),
+      }),
+    comment: z
+      .string()
+      .min(10, {
+        message: t('commentMin'),
+      })
+      .max(1000, {
+        message: t('commentMax'),
+      }),
+  });
+};

@@ -3,6 +3,7 @@ import { Card, CardHeader } from '@/components/ui/card';
 import { LuMinus, LuPlus } from 'react-icons/lu';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 const CounterInput = ({
   detail,
@@ -12,6 +13,7 @@ const CounterInput = ({
   defaultValue?: number;
 }) => {
   const [count, setCount] = useState(defaultValue || 0);
+  const t = useTranslations('SpecifyNumberInput');
   const increaseCount = () => {
     setCount((prevCount) => prevCount + 1);
   };
@@ -31,7 +33,7 @@ const CounterInput = ({
           <div className="flex flex-col">
             <h2 className="font-medium capitalize">{detail}</h2>
             <p className="text-muted-foreground text-sm">
-              Specify the number of {detail}
+              {t('specifyNumber')} {detail}
             </p>
           </div>
           <div className="flex items-center gap-4">

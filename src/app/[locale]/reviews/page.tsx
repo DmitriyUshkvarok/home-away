@@ -7,13 +7,15 @@ import ReviewCard from '@/components/reviews/ReviewCard';
 import Title from '@/components/properties/Title';
 import FormContainer from '@/components/form/FormContainer';
 import { IconButton } from '@/components/form/Buttons';
+import { getTranslations } from 'next-intl/server';
 
 const ReviewsPage = async () => {
   const reviews = await fetchPropertyReviewsByUser();
+  const t = await getTranslations('ReviewsTitle');
   if (reviews.length === 0) return <EmptyList />;
   return (
     <>
-      <Title text="Your Reviews" />
+      <Title text={t('yourReviews')} />
       <section className="grid md:grid-cols-2 gap-8 mt-4 ">
         {reviews.map((review) => {
           const { comment, rating } = review;

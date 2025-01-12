@@ -14,30 +14,34 @@ import {
 } from '@/components/ui/table';
 import FormContainer from '@/components/form/FormContainer';
 import { IconButton } from '@/components/form/Buttons';
+import { getTranslations } from 'next-intl/server';
 
 const RentalsPage = async () => {
   const rentals = await fetchRentals();
+  const t = await getTranslations('MyRental');
 
   if (rentals.length === 0) {
     return (
       <EmptyList
-        heading="No rentals to display."
-        message="Don't hesitate to create a rental."
+        heading={t('noRentalsHeading')}
+        message={t('noRentalsMessage')}
       />
     );
   }
   return (
     <div className="mt-16">
-      <h4 className="mb-4 capitalize">Active Properties : {rentals.length}</h4>
+      <h4 className="mb-4 capitalize">
+        {t('activeProperties')} : {rentals.length}
+      </h4>
       <Table>
-        <TableCaption>A list of all your properties.</TableCaption>
+        <TableCaption>{t('propertyList')}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Property Name</TableHead>
-            <TableHead>Nightly Rate </TableHead>
-            <TableHead>Nights Booked</TableHead>
-            <TableHead>Total Income</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead>{t('propertyName')}</TableHead>
+            <TableHead>{t('nightlyRate')}</TableHead>
+            <TableHead>{t('nightsBooked')}</TableHead>
+            <TableHead>{t('totalIncome')}</TableHead>
+            <TableHead>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -7,13 +7,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { getTranslations } from 'next-intl/server';
 
 const name = 'category';
-const CategoriesInput = ({ defaultValue }: { defaultValue?: string }) => {
+const CategoriesInput = async ({ defaultValue }: { defaultValue?: string }) => {
+  const t = await getTranslations('Categories');
+  const tLabel = await getTranslations('CategoriesInput');
   return (
     <div className="mb-2">
       <Label htmlFor={name} className="capitalize">
-        Categories
+        {tLabel('categories')}
       </Label>
       <Select
         defaultValue={defaultValue || categories[0].label}
@@ -28,7 +31,7 @@ const CategoriesInput = ({ defaultValue }: { defaultValue?: string }) => {
             return (
               <SelectItem key={item.label} value={item.label}>
                 <span className="flex items-center gap-2">
-                  <item.icon /> {item.label}
+                  <item.icon /> {t(item.label)}
                 </span>
               </SelectItem>
             );

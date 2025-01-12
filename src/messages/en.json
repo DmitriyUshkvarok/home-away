@@ -126,5 +126,131 @@
   },
   "UpdateProfileImage": {
     "success": "Profile image updated successfully"
+  },
+  "UpdateProfile": {
+    "success": "Profile updated successfully"
+  },
+  "ImageValidation": {
+    "sizeLimitExceeded": "File size must be less than 1 MB",
+    "invalidFileType": "File must be an image"
+  },
+  "ProfileValidation": {
+    "firstNameMin": "First name must be at least 2 characters",
+    "lastNameMin": "Last name must be at least 2 characters",
+    "usernameMin": "Username must be at least 2 characters",
+    "defaultError": "Invalid input"
+  },
+  "PropertyValidation": {
+    "nameMin": "Name must be at least 2 characters.",
+    "nameMax": "Name must be less than 100 characters.",
+    "taglineMin": "Tagline must be at least 2 characters.",
+    "taglineMax": "Tagline must be less than 100 characters.",
+    "priceMin": "Price must be a positive number.",
+    "descriptionWords": "Description must be between 10 and 1000 words.",
+    "guestsMin": "Guest amount must be a positive number.",
+    "bedroomsMin": "Bedrooms amount must be a positive number.",
+    "bedsMin": "Beds amount must be a positive number.",
+    "bathsMin": "Baths amount must be a positive number."
+  },
+  "ReviewValidation": {
+    "propertyIdRequired": "Property ID is required.",
+    "ratingRange": "Rating must be between 1 and 5.",
+    "commentMin": "Comment must be at least 10 characters.",
+    "commentMax": "Comment must be less than 1000 characters."
+  },
+  "Favorites": {
+    "addedToFavorites": "Added to Favorites.",
+    "removedFromFavorites": "Removed from Favorites."
+  },
+  "Review": {
+    "submittedSuccessfully": "Review submitted successfully."
+  },
+  "Booking": {
+    "totalBookings": "Total bookings: {count}",
+    "tableCaption": "A list of your recent bookings.",
+    "propertyName": "Property Name",
+    "country": "Country",
+    "nights": "Nights",
+    "total": "Total",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "actions": "Actions",
+    "deleteBooking": "Delete Booking"
+  },
+  "ReviewsTitle": {
+    "yourReviews": "Your Reviews"
+  },
+  "Reservations": {
+    "totalReservations": "Total Reservations",
+    "reservationsList": "A list of your recent reservations",
+    "propertyName": "Property Name",
+    "country": "Country",
+    "nights": "Nights",
+    "total": "Total",
+    "checkIn": "Check In",
+    "checkOut": "Check Out"
+  },
+  "Stats": {
+    "properties": "Properties",
+    "nights": "Nights",
+    "total": "Total"
+  },
+  "CraateAndUpdateRental": {
+    "createProperty": "Create Property",
+    "generalInfo": "General Info",
+    "nameLabel": "Name (20 limit)",
+    "nameDefaultValue": "Cabin in Latvia",
+    "taglineLabel": "Tagline (30 limit)",
+    "taglineDefaultValue": "Dream Getaway Awaits You Here!",
+    "descriptionLabel": "Description (10 - 1000 Words)",
+    "accommodationDetails": "Accommodation Details",
+    "guestsLabel": "Guests",
+    "bedroomsLabel": "Bedrooms",
+    "bedsLabel": "Beds",
+    "bathsLabel": "Baths",
+    "amenities": "Amenities",
+    "createRentalButton": "Create Rental"
+  },
+  "DefaultDescription": {
+    "tempDefaultDescription": "Glamping Tuscan Style in an Aframe Cabin Tent, nestled in a beautiful olive orchard. AC, heat, Queen Bed, TV, Wi-Fi and an amazing view. Close to Weeki Wachee River State Park, mermaids, manatees, Chassahwitzka River and on the SC Bike Path. Kayaks available for rivers. Bathhouse, fire pit, Kitchenette, fresh eggs. Relax & enjoy fresh country air. No pets please. Ducks, hens and roosters roam the grounds. We have a Pot Cake Rescue from Bimini, Retriever and Pom dog. The space is inspiring and relaxing. Enjoy the beauty of the orchard. Spring trees are in blossom and harvested in Fall. We have a farm store where we sell our farm to table products."
+  },
+  "SpecifyNumberInput": {
+    "specifyNumber": "Specify the number of"
+  },
+  "CategoriesInput": {
+    "categories": " Categories"
+  },
+  "AmenitiesInput": {
+    "unlimitedCloudStorage": "Unlimited cloud storage",
+    "vipParkingForSquirrels": "VIP parking for squirrels",
+    "selfLightingFirePit": "Self-lighting fire pit",
+    "bbqGrillWithMasterchef": "BBQ grill with a masterchef diploma",
+    "outdoorFurniture": "Outdoor furniture (tree stumps)",
+    "privateBathroom": "Private bathroom (bushes nearby)",
+    "hotShower": "Hot shower (sun required)",
+    "kitchenette": "Kitchenette (aka fire pit)",
+    "naturalHeating": "Natural heating (bring a coat)",
+    "airConditioning": "Air conditioning (breeze from the west)",
+    "bedLinens": "Bed linens (leaves)",
+    "towels": "Towels (more leaves)",
+    "picnicTable": "Picnic table (yet another tree stump)",
+    "hammock": "Hammock (two trees and a rope)",
+    "solarPower": "Solar power (daylight)",
+    "waterSupply": "Water supply (river a mile away)",
+    "cookingUtensils": "Cooking utensils (sticks and stones)",
+    "coolBox": "Cool box (hole in the ground)",
+    "lanterns": "Lanterns (fireflies)",
+    "firstAidKit": "First aid kit (hope and prayers)"
+  },
+  "MyRental": {
+    "noRentalsHeading": "No rentals to display.",
+    "noRentalsMessage": "Don't hesitate to create a rental.",
+    "activeProperties": "Active Properties",
+    "propertyList": "A list of all your properties.",
+    "propertyName": "Property Name",
+    "nightlyRate": "Nightly Rate",
+    "nightsBooked": "Nights Booked",
+    "totalIncome": "Total Income",
+    "actions": "Actions"
   }
 }

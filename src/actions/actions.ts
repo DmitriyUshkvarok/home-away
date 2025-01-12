@@ -1,6 +1,6 @@
 'use server';
 import db from '../utils/db';
-import { /*auth,*/ clerkClient, currentUser } from '@clerk/nextjs/server';
+import { clerkClient, currentUser } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import {
@@ -28,8 +28,6 @@ const getAuthUser = async () => {
   if (!user) {
     throw new Error('You must be logged in to access this route');
   }
-
-  //   if (!user.privateMetadata.hasProfile) redirect('/profile/create');
   return user;
 };
 
@@ -47,7 +45,10 @@ export const createProfileAction = async (
     const user = await currentUser();
     if (!user) throw new Error('Please login to create a profile');
     const rawData = Object.fromEntries(formData);
-    const validatedFields = validateWithZodSchema(profileSchema, rawData);
+    const validatedFields = await validateWithZodSchema(
+      profileSchema(),
+      rawData
+    );
     await db.profile.create({
       data: {
         clerkId: user?.id,
@@ -76,10 +77,13 @@ export const updateProfileAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const t = await getTranslations('UpdateProfile');
   try {
     const rawData = Object.fromEntries(formData);
-    const validatedFields = validateWithZodSchema(profileSchema, rawData);
-    console.log(validatedFields);
+    const validatedFields = await validateWithZodSchema(
+      profileSchema(),
+      rawData
+    );
     await db.profile.update({
       where: {
         clerkId: user.id,
@@ -87,7 +91,7 @@ export const updateProfileAction = async (
       data: validatedFields,
     });
     revalidatePath('/profile');
-    return { message: 'Profile updated successfully' };
+    return { message: t('success') };
   } catch (error) {
     return renderError(error);
   }
@@ -127,7 +131,18 @@ export const updateProfileImageAction = async (
   const t = await getTranslations('UpdateProfileImage');
   try {
     const image = formData.get('image') as File;
-    const validatedFields = validateWithZodSchema(imageSchema, { image });
+
+    const imageValidationSchemaPromise = (async () => {
+      const tImageValidation = await getTranslations('ImageValidation');
+      return imageSchema(tImageValidation);
+    })();
+
+    const validatedFields = await validateWithZodSchema(
+      imageValidationSchemaPromise,
+      {
+        image,
+      }
+    );
     const fullPath = await uploadImage(validatedFields.image);
 
     await db.profile.update({
@@ -164,12 +179,23 @@ export const createPropertyAction = async (
   try {
     const rawData = Object.fromEntries(formData);
     const file = formData.get('image') as File;
-    const validatedFile = validateWithZodSchema(imageSchema, {
-      image: file,
-    });
-    const fullPath = await uploadImage(validatedFile.image);
 
-    const validatedFields = validateWithZodSchema(propertySchema, rawData);
+    const imageValidationSchemaPromise = (async () => {
+      const tImageValidation = await getTranslations('ImageValidation');
+      return imageSchema(tImageValidation);
+    })();
+    const validatedFile = await validateWithZodSchema(
+      imageValidationSchemaPromise,
+      {
+        image: file,
+      }
+    );
+    const fullPath = await uploadImage(validatedFile.image);
+    console.log('Raw data:', rawData);
+    const validatedFields = await validateWithZodSchema(
+      propertySchema(),
+      rawData
+    );
 
     await db.property.create({
       data: {
@@ -235,6 +261,7 @@ export const toggleFavoriteAction = async (prevState: {
   pathname: string;
 }) => {
   const user = await getAuthUser();
+  const t = await getTranslations('Favorites');
   const { propertyId, favoriteId, pathname } = prevState;
 
   // Проверяем, есть ли у пользователя профиль в базе данных
@@ -246,7 +273,7 @@ export const toggleFavoriteAction = async (prevState: {
 
   if (!userProfile) {
     const localeMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
-    const locale = localeMatch ? localeMatch[1] : 'en'; // Локаль по умолчанию
+    const locale = localeMatch ? localeMatch[1] : 'en';
     return redirect(`/${locale}/profile/create`);
   }
 
@@ -266,7 +293,9 @@ export const toggleFavoriteAction = async (prevState: {
       });
     }
     revalidatePath(pathname);
-    return { message: favoriteId ? 'Removed from Faves' : 'Added to Faves' };
+    return {
+      message: favoriteId ? t('removedFromFavorites') : t('addedToFavorites'),
+    };
   } catch (error) {
     return renderError(error);
   }
@@ -316,6 +345,7 @@ export const createReviewAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const t = await getTranslations('Review');
   const pathname = formData.get('pathname') as string;
 
   const userProfile = await db.profile.findUnique({
@@ -331,7 +361,10 @@ export const createReviewAction = async (
   }
   try {
     const rawData = Object.fromEntries(formData);
-    const validatedFields = validateWithZodSchema(createReviewSchema, rawData);
+    const validatedFields = await validateWithZodSchema(
+      createReviewSchema(),
+      rawData
+    );
     await db.review.create({
       data: {
         ...validatedFields,
@@ -339,7 +372,7 @@ export const createReviewAction = async (
       },
     });
     revalidatePath(`/properties/${validatedFields.propertyId}`);
-    return { message: 'Review submitted successfully' };
+    return { message: t('submittedSuccessfully') };
   } catch (error) {
     return renderError(error);
   }
@@ -620,7 +653,10 @@ export const updatePropertyAction = async (
 
   try {
     const rawData = Object.fromEntries(formData);
-    const validatedFields = validateWithZodSchema(propertySchema, rawData);
+    const validatedFields = await validateWithZodSchema(
+      propertySchema(),
+      rawData
+    );
     await db.property.update({
       where: {
         id: propertyId,
@@ -644,9 +680,17 @@ export const updatePropertyImageAction = async (
   const user = await getAuthUser();
   const propertyId = formData.get('id') as string;
 
+  const imageValidationSchemaPromise = (async () => {
+    const tImageValidation = await getTranslations('ImageValidation');
+    return imageSchema(tImageValidation);
+  })();
+
   try {
     const image = formData.get('image') as File;
-    const validatedFields = validateWithZodSchema(imageSchema, { image });
+    const validatedFields = await validateWithZodSchema(
+      imageValidationSchemaPromise,
+      { image }
+    );
     const fullPath = await uploadImage(validatedFields.image);
     await db.property.update({
       where: {

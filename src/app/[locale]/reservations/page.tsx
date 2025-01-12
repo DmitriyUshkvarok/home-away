@@ -13,9 +13,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import Stats from '@/components/reservations/Stats';
+import { getTranslations } from 'next-intl/server';
 
 const ReservationsPage = async () => {
   const reservations = await fetchReservations();
+  const t = await getTranslations('Reservations');
 
   if (reservations.length === 0) {
     return <EmptyList />;
@@ -25,18 +27,18 @@ const ReservationsPage = async () => {
       <Stats />
       <div className="mt-16">
         <h4 className="mb-4 capitalize">
-          total reservations : {reservations.length}
+          {t('totalReservations')} : {reservations.length}
         </h4>
         <Table>
-          <TableCaption>A list of your recent reservations.</TableCaption>
+          <TableCaption>{t('reservationsList')}</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Property Name</TableHead>
-              <TableHead>Country</TableHead>
-              <TableHead>Nights</TableHead>
-              <TableHead>Total</TableHead>
-              <TableHead>Check In</TableHead>
-              <TableHead>Check Out</TableHead>
+              <TableHead>{t('propertyName')}</TableHead>
+              <TableHead>{t('country')}</TableHead>
+              <TableHead>{t('nights')}</TableHead>
+              <TableHead>{t('total')}</TableHead>
+              <TableHead>{t('checkIn')}</TableHead>
+              <TableHead>{t('checkOut')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

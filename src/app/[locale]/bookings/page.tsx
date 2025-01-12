@@ -14,26 +14,30 @@ import {
 import FormContainer from '@/components/form/FormContainer';
 import { IconButton } from '@/components/form/Buttons';
 import { fetchBookings, deleteBookingAction } from '@/actions/actions';
+import { getTranslations } from 'next-intl/server';
 
 const BookingsPage = async () => {
   const bookings = await fetchBookings();
+  const t = await getTranslations('Booking');
   if (bookings.length === 0) {
     return <EmptyList />;
   }
   return (
     <div className="mt-16">
-      <h4 className="mb-4 capitalize">total bookings : {bookings.length}</h4>
+      <h4 className="mb-4 capitalize">
+        {t('totalBookings', { count: bookings.length })}
+      </h4>
       <Table>
-        <TableCaption>A list of your recent bookings.</TableCaption>
+        <TableCaption>{t('tableCaption')}</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>Property Name</TableHead>
-            <TableHead>Country</TableHead>
-            <TableHead>Nights</TableHead>
-            <TableHead>Total</TableHead>
-            <TableHead>Check In</TableHead>
-            <TableHead>Check Out</TableHead>
-            <TableHead>Actions</TableHead>
+            <TableHead>{t('propertyName')}</TableHead>
+            <TableHead>{t('country')}</TableHead>
+            <TableHead>{t('nights')}</TableHead>
+            <TableHead>{t('total')}</TableHead>
+            <TableHead>{t('checkIn')}</TableHead>
+            <TableHead>{t('checkOut')}</TableHead>
+            <TableHead>{t('actions')}</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

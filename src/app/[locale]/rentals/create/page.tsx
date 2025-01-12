@@ -10,8 +10,10 @@ import ImageInput from '@/components/form/ImageInput';
 import CounterInput from '@/components/form/CounterInput';
 import AmenitiesInput from '@/components/form/AmenitiesInput';
 import { headers } from 'next/headers';
+import { getTranslations } from 'next-intl/server';
 
 async function CreateProperty() {
+  const t = await getTranslations('CraateAndUpdateRental');
   const headersList = await headers();
   const referer = headersList.get('referer');
   const pathname = referer ? new URL(referer).pathname : '/';
@@ -19,24 +21,24 @@ async function CreateProperty() {
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">
-        create property
+        {t('createProperty')}
       </h1>
       <div className="border p-8 rounded-md">
-        <h3 className="text-lg mb-4 font-medium">General Info</h3>
+        <h3 className="text-lg mb-4 font-medium">{t('generalInfo')}</h3>
         <FormContainer action={createPropertyAction}>
           <div className="grid md:grid-cols-2 gap-8 mb-4">
             <input name="pathname" type="hidden" value={pathname} />
             <FormInput
               name="name"
               type="text"
-              label="Name (20 limit)"
-              defaultValue="Cabin in Latvia"
+              label={t('nameLabel')}
+              defaultValue={t('nameDefaultValue')}
             />
             <FormInput
               name="tagline"
               type="text "
-              label="Tagline (30 limit)"
-              defaultValue="Dream Getaway Awaits You Here!"
+              label={t('taglineLabel')}
+              defaultValue={t('taglineDefaultValue')}
             />
             {/* price */}
             <PriceInput />
@@ -44,24 +46,21 @@ async function CreateProperty() {
             <CategoriesInput />
           </div>
           {/* text area / description */}
-          <TextAreaInput
-            name="description"
-            labelText="Description (10 - 1000 Words)"
-          />
+          <TextAreaInput name="description" labelText={t('descriptionLabel')} />
           <div className="grid sm:grid-cols-2 gap-8 mt-4">
             <CountriesInput />
             <ImageInput />
           </div>
           <h3 className="text-lg mt-8 mb-4 font-medium">
-            Accommodation Details
+            {t('accommodationDetails')}
           </h3>
           <CounterInput detail="guests" />
           <CounterInput detail="bedrooms" />
           <CounterInput detail="beds" />
           <CounterInput detail="baths" />
-          <h3 className="text-lg mt-10 mb-6 font-medium">Amenities</h3>
+          <h3 className="text-lg mt-10 mb-6 font-medium">{t('amenities')}</h3>
           <AmenitiesInput />
-          <SubmitButton text="create rental" className="mt-12" />
+          <SubmitButton text={t('createRentalButton')} className="mt-12" />
         </FormContainer>
       </div>
     </section>
