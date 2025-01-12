@@ -6,6 +6,7 @@ import FormContainer from '@/components/form/FormContainer';
 import { SubmitButton } from '@/components/form/Buttons';
 import { createBookingAction } from '@/actions/actions';
 import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 const ConfirmBooking = () => {
   const { userId } = useAuth();
@@ -13,10 +14,12 @@ const ConfirmBooking = () => {
   const checkIn = range?.from as Date;
   const checkOut = range?.to as Date;
   const t = useTranslations('ConfirmBooking');
+  const pathname = usePathname();
   const createBooking = createBookingAction.bind(null, {
     propertyId,
     checkIn,
     checkOut,
+    pathname,
   });
   return (
     <>

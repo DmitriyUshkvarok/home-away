@@ -1,17 +1,96 @@
 'use client';
 import { useState } from 'react';
-import { amenities, Amenity } from '@/utils/amenities';
+import { Amenity } from '@/utils/amenities';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+  FiCloud,
+  FiTruck,
+  FiZap,
+  FiWind,
+  FiSun,
+  FiCoffee,
+  FiFeather,
+  FiAirplay,
+  FiTrello,
+  FiBox,
+  FiAnchor,
+  FiDroplet,
+  FiMapPin,
+  FiSunrise,
+  FiSunset,
+  FiMusic,
+  FiHeadphones,
+  FiRadio,
+  FiFilm,
+  FiTv,
+} from 'react-icons/fi';
+import { useTranslations } from 'next-intl';
 
 function AmenitiesInput({ defaultValue }: { defaultValue?: Amenity[] }) {
-  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => ({
-    name,
-    selected,
-    icon: amenities.find((amenity) => amenity.name === name)!.icon,
-  }));
+  const t = useTranslations('AmenitiesInput');
+
+  const amenities: Amenity[] = [
+    { name: t('unlimitedCloudStorage'), icon: FiCloud, selected: false },
+    { name: t('vipParkingForSquirrels'), icon: FiTruck, selected: false },
+    { name: t('selfLightingFirePit'), icon: FiZap, selected: false },
+    {
+      name: t('bbqGrillWithMasterchef'),
+      icon: FiWind,
+      selected: false,
+    },
+    { name: t('outdoorFurniture'), icon: FiSun, selected: false },
+    {
+      name: t('privateBathroom'),
+      icon: FiCoffee,
+      selected: false,
+    },
+    { name: t('hotShower'), icon: FiFeather, selected: false },
+    { name: t('kitchenette'), icon: FiAirplay, selected: false },
+    { name: t('naturalHeating'), icon: FiTrello, selected: false },
+    {
+      name: t('airConditioning'),
+      icon: FiBox,
+      selected: false,
+    },
+    { name: t('bedLinens'), icon: FiAnchor, selected: false },
+    { name: t('towels'), icon: FiDroplet, selected: false },
+    {
+      name: t('picnicTable'),
+      icon: FiMapPin,
+      selected: false,
+    },
+    {
+      name: t('hammock'),
+      icon: FiSunrise,
+      selected: false,
+    },
+    { name: t('solarPower'), icon: FiSunset, selected: false },
+    {
+      name: t('waterSupply'),
+      icon: FiMusic,
+      selected: false,
+    },
+    {
+      name: t('cookingUtensils'),
+      icon: FiHeadphones,
+      selected: false,
+    },
+    { name: t('coolBox'), icon: FiRadio, selected: false },
+    { name: t('lanterns'), icon: FiFilm, selected: false },
+    { name: t('firstAidKit'), icon: FiTv, selected: false },
+  ];
+
+  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => {
+    const amenity = amenities.find((amenity) => amenity.name === name);
+    return amenity
+      ? { name, selected, icon: amenity.icon }
+      : { name, selected, icon: FiCloud };
+  });
+
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>(
     amenitiesWithIcons || amenities
   );
+
   const handleChange = (amenity: Amenity) => {
     setSelectedAmenities((prev) => {
       return prev.map((a) => {

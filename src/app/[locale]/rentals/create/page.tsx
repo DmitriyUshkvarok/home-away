@@ -54,10 +54,10 @@ async function CreateProperty() {
           <h3 className="text-lg mt-8 mb-4 font-medium">
             {t('accommodationDetails')}
           </h3>
-          <CounterInput detail="guests" />
-          <CounterInput detail="bedrooms" />
-          <CounterInput detail="beds" />
-          <CounterInput detail="baths" />
+          <CounterInput detail="guests" nameTitle={t('guestsLabel')} />
+          <CounterInput detail="bedrooms" nameTitle={t('bedroomsLabel')} />
+          <CounterInput detail="beds" nameTitle={t('bedsLabel')} />
+          <CounterInput detail="baths" nameTitle={t('bathsLabel')} />
           <h3 className="text-lg mt-10 mb-6 font-medium">{t('amenities')}</h3>
           <AmenitiesInput />
           <SubmitButton text={t('createRentalButton')} className="mt-12" />

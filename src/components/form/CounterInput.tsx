@@ -7,9 +7,11 @@ import { useTranslations } from 'next-intl';
 
 const CounterInput = ({
   detail,
+  nameTitle,
   defaultValue,
 }: {
   detail: string;
+  nameTitle: string;
   defaultValue?: number;
 }) => {
   const [count, setCount] = useState(defaultValue || 0);
@@ -31,9 +33,9 @@ const CounterInput = ({
       <CardHeader className="flex flex-col gapy-5">
         <div className="flex items-center justify-between flex-wrap">
           <div className="flex flex-col">
-            <h2 className="font-medium capitalize">{detail}</h2>
+            <h2 className="font-medium capitalize">{nameTitle}</h2>
             <p className="text-muted-foreground text-sm">
-              {t('specifyNumber')} {detail}
+              {t('specifyNumber')} {nameTitle}
             </p>
           </div>
           <div className="flex items-center gap-4">

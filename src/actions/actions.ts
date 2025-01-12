@@ -191,7 +191,6 @@ export const createPropertyAction = async (
       }
     );
     const fullPath = await uploadImage(validatedFile.image);
-    console.log('Raw data:', rawData);
     const validatedFields = await validateWithZodSchema(
       propertySchema(),
       rawData
@@ -483,6 +482,7 @@ export const createBookingAction = async (prevState: {
   propertyId: string;
   checkIn: Date;
   checkOut: Date;
+  pathname: string;
 }) => {
   let bookingId: null | string = null;
   const user = await getAuthUser();
@@ -494,7 +494,7 @@ export const createBookingAction = async (prevState: {
     },
   });
 
-  const { propertyId, checkIn, checkOut } = prevState;
+  const { propertyId, checkIn, checkOut, pathname } = prevState;
   const property = await db.property.findUnique({
     where: {
       id: propertyId,
@@ -527,7 +527,11 @@ export const createBookingAction = async (prevState: {
   } catch (error) {
     return renderError(error);
   }
-  redirect(`/checkout?bookingId=${bookingId}`);
+
+  const localeMatch = pathname.match(/^\/([a-z]{2})(\/|$)/);
+  const locale = localeMatch ? localeMatch[1] : 'en';
+  return redirect(`/${locale}/checkout?bookingId=${bookingId}`);
+  // redirect(`/checkout?bookingId=${bookingId}`);
 };
 
 export const fetchBookings = async () => {
@@ -649,6 +653,7 @@ export const updatePropertyAction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   const user = await getAuthUser();
+  const t = await getTranslations('CraateAndUpdateRental');
   const propertyId = formData.get('id') as string;
 
   try {
@@ -667,7 +672,7 @@ export const updatePropertyAction = async (
       },
     });
     revalidatePath(`/rentals/${propertyId}/edit`);
-    return { message: 'Update Successful' };
+    return { message: t('updateSuccessful') };
   } catch (error) {
     return renderError(error);
   }

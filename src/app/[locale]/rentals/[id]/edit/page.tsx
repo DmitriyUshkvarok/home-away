@@ -15,23 +15,27 @@ import { SubmitButton } from '@/components/form/Buttons';
 import { redirect } from 'next/navigation';
 import { type Amenity } from '@/utils/amenities';
 import ImageInputContainer from '@/components/form/ImageInputContainer';
+import { getTranslations } from 'next-intl/server';
 
 const EditRentalPage = async ({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) => {
+  const t = await getTranslations('CraateAndUpdateRental');
   const { id } = await params;
   const property = await fetchRentalDetails(id);
   if (!property) redirect('/');
   const defaultAmenities: Amenity[] = JSON.parse(property.amenities);
   return (
     <section>
-      <h1 className="text-2xl font-semibold mb-8 capitalize">Edit Property</h1>
+      <h1 className="text-2xl font-semibold mb-8 capitalize">
+        {t('editPropery')}
+      </h1>
       <div className="border p-8 rounded-md ">
         <ImageInputContainer
           name={property.name}
-          text="Update Image"
+          text={t('updateImage')}
           action={updatePropertyImageAction}
           image={property.image}
         >
@@ -44,13 +48,13 @@ const EditRentalPage = async ({
             <FormInput
               name="name"
               type="text"
-              label="Name (20 limit)"
+              label={t('nameLabel')}
               defaultValue={property.name}
             />
             <FormInput
               name="tagline"
               type="text "
-              label="Tagline (30 limit)"
+              label={t('taglineLabel')}
               defaultValue={property.tagline}
             />
             <PriceInput defaultValue={property.price} />
@@ -60,20 +64,36 @@ const EditRentalPage = async ({
 
           <TextAreaInput
             name="description"
-            labelText="Description (10 - 100 Words)"
+            labelText={t('descriptionLabel')}
             defaultValue={property.description}
           />
 
           <h3 className="text-lg mt-8 mb-4 font-medium">
-            Accommodation Details
+            {t('accommodationDetails')}
           </h3>
-          <CounterInput detail="guests" defaultValue={property.guests} />
-          <CounterInput detail="bedrooms" defaultValue={property.bedrooms} />
-          <CounterInput detail="beds" defaultValue={property.beds} />
-          <CounterInput detail="baths" defaultValue={property.baths} />
+          <CounterInput
+            detail="guests"
+            defaultValue={property.guests}
+            nameTitle={t('guestsLabel')}
+          />
+          <CounterInput
+            detail="bedrooms"
+            defaultValue={property.bedrooms}
+            nameTitle={t('bedroomsLabel')}
+          />
+          <CounterInput
+            detail="beds"
+            defaultValue={property.beds}
+            nameTitle={t('bedsLabel')}
+          />
+          <CounterInput
+            detail="baths"
+            defaultValue={property.baths}
+            nameTitle={t('bathsLabel')}
+          />
           <h3 className="text-lg mt-10 mb-6 font-medium">Amenities</h3>
           <AmenitiesInput defaultValue={defaultAmenities} />
-          <SubmitButton text="edit property" className="mt-12" />
+          <SubmitButton text={t('editPropertyButton')} className="mt-12" />
         </FormContainer>
       </div>
     </section>
