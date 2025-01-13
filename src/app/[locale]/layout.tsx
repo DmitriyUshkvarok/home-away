@@ -31,6 +31,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <html lang={locale || 'en'} suppressHydrationWarning={true}>
         <body>
+          <h1 className="hiddenTitle">Home Away Dmitriy Ushkvarok Home Page</h1>
           <NextIntlClientProvider messages={messages}>
             <Providers>
               <Navbar />

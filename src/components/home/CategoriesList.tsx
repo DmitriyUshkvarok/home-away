@@ -17,7 +17,7 @@ const CategoriesList = async ({
   const categoryName = currentCategory ? t(currentCategory.label) : 'all';
   return (
     <section>
-      <h1 className="hiddenTitle">{categoryName}</h1>
+      <h2 className="hiddenTitle">{categoryName}</h2>
       <ScrollArea className="py-6">
         <div className="flex gap-x-4">
           {categories.map((item) => {
