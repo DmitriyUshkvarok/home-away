@@ -40,8 +40,6 @@ export async function generateMetadata(
 
   return {
     title: property.name,
-    description:
-      property.description || 'No description available for this property',
     openGraph: {
       title: `${property.name} Home Away | Your Ultimate Vacation Rental App`,
       images: [property.image, ...previousImages],
