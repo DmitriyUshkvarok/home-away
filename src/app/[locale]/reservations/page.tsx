@@ -14,6 +14,21 @@ import {
 } from '@/components/ui/table';
 import Stats from '@/components/reservations/Stats';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title:
+    'Reservations Page  | Vacation Rentals - Cabins, Tents, and Caravans | HomeAway',
+  description:
+    'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
+  alternates: {
+    canonical: '/reservations',
+    languages: {
+      'en-US': '/en-US',
+      'uk-UA': '/uk-UA',
+    },
+  },
+};
 
 const ReservationsPage = async () => {
   const reservations = await fetchReservations();

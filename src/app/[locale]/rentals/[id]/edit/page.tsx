@@ -16,6 +16,46 @@ import { redirect } from 'next/navigation';
 import { type Amenity } from '@/utils/amenities';
 import ImageInputContainer from '@/components/form/ImageInputContainer';
 import { getTranslations } from 'next-intl/server';
+import type { Metadata, ResolvingMetadata } from 'next';
+
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+
+  const property = await fetchRentalDetails(id);
+
+  if (!property) {
+    return {
+      title: 'Rental not found',
+      description: 'This Rental is not available.',
+    };
+  }
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: property.name,
+    description:
+      property.description || 'No description available for this property',
+    openGraph: {
+      title: `${property.name} Home Away | Your Ultimate Vacation Rental App`,
+      images: [property.image, ...previousImages],
+    },
+    alternates: {
+      canonical: `/rentals${id}/edit`,
+      languages: {
+        'en-US': `/en/rentals${id}/edit`,
+        'uk-UA': `/ua/rentals${id}/edit`,
+      },
+    },
+  };
+}
 
 const EditRentalPage = async ({
   params,

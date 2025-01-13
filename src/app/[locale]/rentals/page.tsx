@@ -15,6 +15,21 @@ import {
 import FormContainer from '@/components/form/FormContainer';
 import { IconButton } from '@/components/form/Buttons';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title:
+    'Rentals Page  | Vacation Rentals - Cabins, Tents, and Caravans | HomeAway',
+  description:
+    'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
+  alternates: {
+    canonical: '/rentals',
+    languages: {
+      'en-US': '/en-US',
+      'uk-UA': '/uk-UA',
+    },
+  },
+};
 
 const RentalsPage = async () => {
   const rentals = await fetchRentals();

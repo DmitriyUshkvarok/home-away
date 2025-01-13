@@ -14,10 +14,12 @@ const CategoriesList = async ({
   const searchTerm = search ? `&search=${search}` : '';
 
   const currentCategory = categories.find((item) => item.label === category);
-  const categoryName = currentCategory ? t(currentCategory.label) : 'all';
+  const categoryName = currentCategory
+    ? t(currentCategory.label)
+    : 'Home Page All Category Homes';
   return (
     <section>
-      <h2 className="hiddenTitle">{categoryName}</h2>
+      <h1 className="hiddenTitle">{categoryName}</h1>
       <ScrollArea className="py-6">
         <div className="flex gap-x-4">
           {categories.map((item) => {

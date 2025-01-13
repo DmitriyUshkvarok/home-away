@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://home-away-snowy.vercel.app/sitemap.xml

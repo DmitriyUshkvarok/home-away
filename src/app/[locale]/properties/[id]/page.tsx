@@ -15,6 +15,46 @@ import DynamicMap from '@/components/properties/ClientMapWrapper';
 import SubmitReview from '@/components/reviews/SubmitReview';
 import PropertyReviews from '@/components/reviews/PropertyReviews';
 import BookingWrapper from '@/components/booking/BookingWrapper';
+import type { Metadata, ResolvingMetadata } from 'next';
+
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: Promise<{ id: string }>;
+  },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = await params;
+
+  const property = await fetchPropertyDetails(id);
+
+  if (!property) {
+    return {
+      title: 'Property not found',
+      description: 'This property is not available.',
+    };
+  }
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: property.name,
+    description:
+      property.description || 'No description available for this property',
+    openGraph: {
+      title: `${property.name} Home Away | Your Ultimate Vacation Rental App`,
+      images: [property.image, ...previousImages],
+    },
+    alternates: {
+      canonical: `/properties${id}`,
+      languages: {
+        'en-US': `/en/properties${id}`,
+        'uk-UA': `/ua/properties${id}`,
+      },
+    },
+  };
+}
 
 const DynamicPropertiesPage = async ({
   params,

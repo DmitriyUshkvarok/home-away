@@ -5,6 +5,21 @@ import { createProfileAction } from '@/actions/actions';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title:
+    'Create Profile Page  | Vacation Rentals - Cabins, Tents, and Caravans | HomeAway',
+  description:
+    'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
+  alternates: {
+    canonical: '/profile/create',
+    languages: {
+      'en-US': '/en-US',
+      'uk-UA': '/uk-UA',
+    },
+  },
+};
 
 async function CreateProfilePage() {
   const user = await currentUser();
