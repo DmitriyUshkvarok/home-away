@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 
 const Logo = () => {
   return (
-    <Button size="icon" asChild>
+    <Button size="icon" asChild aria-label="Go to homepage">
       <Link href="/">
         <LuTent className="w-6 h-6" />
       </Link>

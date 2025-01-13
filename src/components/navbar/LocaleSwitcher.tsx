@@ -32,7 +32,7 @@ const LocaleSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" aria-label="swich button">
           <GrLanguage className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       </DropdownMenuTrigger>

@@ -17,16 +17,17 @@ const PropertyCard = async ({ property }: { property: PropertyCardProps }) => {
         <div className="relative h-[300px] mb-2 overflow-hidden rounded-md">
           <Image
             src={image}
+            priority
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+            sizes="(max-width: 768px) 30vw, (max-width: 1200px) 50vw"
             alt={name}
             className="rounded-md object-cover transform group-hover:scale-110 transition-transform duration-500"
           />
         </div>
         <div className="flex justify-between items-center">
-          <h3 className="text-sm font-semibold mt-1">
+          <h2 className="text-sm font-semibold mt-1">
             {name.substring(0, 30)}
-          </h3>
+          </h2>
           {/* property rating */}
           <PropertyRating inPage={false} propertyId={propertyId} />
         </div>

@@ -25,10 +25,11 @@ export default async function RootLayout({
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
+
   const messages = await getMessages();
   return (
     <ClerkProvider>
-      <html lang={locale} suppressHydrationWarning={true}>
+      <html lang={locale || 'en'} suppressHydrationWarning={true}>
         <body>
           <NextIntlClientProvider messages={messages}>
             <Providers>
