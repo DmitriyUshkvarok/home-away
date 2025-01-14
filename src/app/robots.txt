@@ -2,4 +2,4 @@ User-Agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://home-away-snowy.vercel.app/sitemap.xml
+Sitemap: https://home-away-snowy.vercel.app/en/sitemap.xml
