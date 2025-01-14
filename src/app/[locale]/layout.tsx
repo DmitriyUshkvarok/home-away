@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://home-away-snowy.vercel.app'),
   title: {
     default: 'Home Away | Your Ultimate Vacation Rental App Dmitriy Ushkvarok',
-    template: `%s | Home Away | Your Ultimate Vacation Rental App`,
+    template: `%s | Home Away`,
   },
   description:
     'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
