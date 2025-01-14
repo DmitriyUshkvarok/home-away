@@ -7,12 +7,11 @@ import { Metadata } from 'next';
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { category?: string; search?: string };
+  searchParams: Promise<{ category?: string; search?: string }>;
 }): Promise<Metadata> {
+  const { category } = await searchParams;
   const baseUrl = 'https://home-away-snowy.vercel.app';
-  const query = searchParams.category
-    ? `?category=${searchParams.category}`
-    : '';
+  const query = category ? `?category=${category}` : '';
   const canonical = `${baseUrl}/${query}`;
 
   return {
