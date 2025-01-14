@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: `%s | Home Away | Your Ultimate Vacation Rental App`,
   },
   description:
-    'Home Away is your go-to platform for booking vacation rentals around the world. Whether you’re looking for a cozy getaway or a luxurious retreat Explore and book your perfect vacation rental, all with the convenience of a seamless online booking experience. Find your dream destination, relax, and create lasting memories with Home Away.',
+    'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
   generator: 'Next.js',
   applicationName: 'Home Away App Dmitriy Ushkvarok',
   referrer: 'origin-when-cross-origin',
