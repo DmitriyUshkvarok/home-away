@@ -15,8 +15,7 @@ export async function generateMetadata({
   const canonical = `${baseUrl}/${query}`;
 
   return {
-    title:
-      'Home Page | Vacation Rentals - Cabins, Tents, and Caravans | HomeAway',
+    title: 'Home Page | Vacation Rentals - Cabins, Tents, and Caravans',
     description:
       'Find the perfect vacation rental: cabins, tents, caravans, and more. Book your next getaway through HomeAway for an unforgettable stay in unique locations both in Ukraine and worldwide.',
     alternates: {
