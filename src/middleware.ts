@@ -15,6 +15,12 @@ const intlMiddleware = createMiddleware(routing);
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
+  const pathname = req.nextUrl.pathname;
+
+  // Пропускаем статические файлы, такие как robots.txt и sitemap.xml
+  if (pathname === '/robots.txt' || pathname === '/sitemap.xml') {
+    return NextResponse.next();
+  }
 
   const isAdminUser = userId === process.env.ADMIN_USER_ID;
   if (isAdminRoute(req) && !isAdminUser) {
