@@ -12,11 +12,11 @@ import { Locale } from '@/i18n/routing';
 export const metadata: Metadata = {
   metadataBase: new URL('https://home-away-snowy.vercel.app'),
   title: {
-    default: 'Home Away | Your Ultimate Vacation Rental App',
+    default: 'Home Away | Your Ultimate Vacation Rental App Dmitriy Ushkvarok',
     template: `%s | Home Away | Your Ultimate Vacation Rental App`,
   },
   description:
-    'Home Away is your go-to platform for booking vacation rentals around the world. Whether you’re looking for a cozy getaway or a luxurious retreat, Home Away offers a wide selection of properties to suit your needs. Explore and book your perfect vacation rental, from beachfront cottages to city apartments, all with the convenience of a seamless online booking experience. Find your dream destination, relax, and create lasting memories with Home Away.',
+    'Home Away is your go-to platform for booking vacation rentals around the world. Whether you’re looking for a cozy getaway or a luxurious retreat Explore and book your perfect vacation rental, all with the convenience of a seamless online booking experience. Find your dream destination, relax, and create lasting memories with Home Away.',
   generator: 'Next.js',
   applicationName: 'Home Away App Dmitriy Ushkvarok',
   referrer: 'origin-when-cross-origin',
