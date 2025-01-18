@@ -45,7 +45,7 @@ const LocaleSwitcher = () => {
           )}
           En
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => onLocaleChange('ua')}>
+        <DropdownMenuItem onClick={() => onLocaleChange('uk')}>
           {uaFlag && (
             <span className="mr-2" role="img" aria-label="Ukrainian Flag">
               {uaFlag}
